@@ -8,142 +8,60 @@ namespace StringAverage
 {
     public class StringAverage
     {
-        //enum stringNum { zero, one, two, three, four, five, six, seven, eight, nine };
+        enum stringNum { zero, one, two, three, four, five, six, seven, eight, nine };
 
         public static string AverageString(string str)
         {
-            char[] splitString = { ' ' };  //設定切割字元
+
             int total = 0;
             int average;
-            string avg = "";
-            string[] numbers = str.Split(splitString);  //切割傳入的字串(用空白切割後，把切割的字元存在字串陣列中)
-            int flag = 0;
 
-            foreach (string s in numbers) //將陣列的元素一個一個抓出來比對
+            if (string.IsNullOrEmpty(str))
             {
-                if (s != "")  //如果陣列元素沒有為空，就正常比對
+                return "n/a";
+            }
+
+            string[] numbers = str.Split(' ');
+
+            foreach (string s in numbers)
+            {
+                int strintToInt = StringToInt(s);
+
+                if (strintToInt == -1)
                 {
-                    switch (s)
-                    {
-                        case "zero":
-                            total = total + 0;
-                            break;
-
-                        case "one":
-                            total = total + 1;
-                            break;
-
-                        case "two":
-                            total = total + 2;
-                            break;
-
-                        case "three":
-                            total = total + 3;
-                            break;
-
-                        case "four":
-                            total = total + 4;
-                            break;
-
-                        case "five":
-                            total = total + 5;
-                            break;
-
-                        case "six":
-                            total = total + 6;
-                            break;
-
-                        case "seven":
-                            total = total + 7;
-                            break;
-
-                        case "eight":
-                            total = total + 8;
-                            break;
-
-                        case "nine":
-                            total = total + 9;
-                            break;
-
-                        default:
-                            flag = 1;
-                            break;
-
-                    }
-                }
-                else  //若為空，就把total 設成-1，強迫跳進avg判斷式的else中
-                {
-                    total = -1;
+                    return "n/a";
                 }
 
-            }
-           
-            int i = numbers.Length;
-            average = (int)(total / i);  //計算平均值(取int)
-            
-            if (flag == 1)
-            {
-                average = -1;
+                total += StringToInt(s);
             }
 
-            if (average == 0)
-            {
-                avg = "zero";
-            }
+            average = (int)(total / numbers.Length);
 
-            else if (average == 1)
-            {
-                avg = "one";
-            }
+            return intToString(average);
 
-            else if (average == 2)
-            {
-                avg = "two";
-            }
-
-            else if (average == 3)
-            {
-                avg = "three";
-            }
-
-            else if (average == 4)
-            {
-                avg = "four";
-            }
-
-            else if (average == 5)
-            {
-                avg = "five";
-            }
-
-            else if (average == 6)
-            {
-                avg = "six";
-            }
-
-            else if (average == 7)
-            {
-                avg = "seven";
-            }
-
-            else if (average == 8)
-            {
-                avg = "eight";
-            }
-
-            else if (average == 9)
-            {
-                avg = "nine";
-            }
-
-            else
-            {
-                avg = "n/a";
-            }
-
-            return avg;
         }
 
+        private static int StringToInt(string StringToInt)
+        {
+            try
+            {
+                stringNum StringToEnum = (stringNum)Enum.Parse(typeof(stringNum), StringToInt);
+                int EnumToInt = (int)StringToEnum;
+                return EnumToInt;
+            }
+            catch
+            {
+                return -1;
+            }
+
+        }
+
+        private static string intToString(int intToString)
+        {
+            stringNum intToEnum = (stringNum)intToString;
+            string EnumToString = (string)intToEnum.ToString();
+            return EnumToString;
+        }
     }
 
 }

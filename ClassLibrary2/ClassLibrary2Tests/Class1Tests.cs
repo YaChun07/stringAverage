@@ -11,19 +11,32 @@ namespace StringAverage.Tests
     public class StringAvg
     {
         [TestMethod()]
-        public void AverageStringTest()
+        public void Four_AverageStringTest()
         {
-            
             Assert.AreEqual("four", StringAverage.AverageString("zero nine five two"));
+            Assert.AreEqual("four", StringAverage.AverageString("five four"));
+        }
+        [TestMethod()]
+        public void Three_AverageStringTest()
+        {
+
             Assert.AreEqual("three", StringAverage.AverageString("four six two three"));
             Assert.AreEqual("three", StringAverage.AverageString("one two three four five"));
-            Assert.AreEqual("four", StringAverage.AverageString("five four"));
+        }
+        [TestMethod()]
+        public void zero_AverageStringTest()
+        {
+
             Assert.AreEqual("zero", StringAverage.AverageString("zero zero zero zero zero"));
-            Assert.AreEqual("two", StringAverage.AverageString("one one eight one"));
+
+        }
+        [TestMethod()]
+        public void na_AverageStringTest()
+        {
+
             Assert.AreEqual("n/a", StringAverage.AverageString(""));
             Assert.AreEqual("n/a", StringAverage.AverageString("eight five six zero qjeoxp one one four qjeoxp"));
-            
+            Assert.AreEqual("n/a", StringAverage.AverageString("qjeoxp"));
         }
-
     }
 }
